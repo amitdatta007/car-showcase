@@ -1,6 +1,11 @@
-import { CustomFiller, Hero, SearchBar } from "@/components";
+import { CarCard, CustomFiller, Hero, SearchBar } from "@/components";
+import getCars from "@/utils/getCars";
 
-const HomePage = () => {
+const HomePage = async () => {
+  const allcars = await getCars();
+
+  const isDataEmpty = !Array.isArray(allcars) || allcars.length < 1 || !allcars;
+
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -18,6 +23,21 @@ const HomePage = () => {
             <CustomFiller />
           </div>
         </div>
+
+        {!isDataEmpty ? (
+          <section>
+            <div className="home__cars-wrapper">
+              {
+                allcars.map((car) => <CarCard key={car.id} car={car} />)
+              }
+            </div>
+          </section>
+        ) : (
+          <div className="home__error-container">
+            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
+            <p>{allcars?.message}</p>
+          </div>
+        )}
       </div>
     </main>
   );
