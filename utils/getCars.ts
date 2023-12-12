@@ -4,7 +4,7 @@ const getCars = async () => {
 		'X-RapidAPI-Host': 'cars-by-api-ninjas.p.rapidapi.com'
 	};
 
-    const res = await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla', {
+    const res = await fetch('https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=audi', {
         headers: headers,
     });
 
